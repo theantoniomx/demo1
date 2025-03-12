@@ -83,16 +83,20 @@
 
   <div class="site-section site-section-sm bg-light">
     <div class="container">
-
       <div class="row mb-5">
         @foreach ($properties as $prop)
         <div class="col-md-6 col-lg-4 mb-4">
           <div class="property-entry h-100">
             <a href="{{ route('property_details', $prop->id) }}" class="property-thumbnail">
-              <div class="offer-type-wrap">
-                <span class="offer-type bg-danger">Sale</span>
-                <span class="offer-type bg-success">Rent</span>
-              </div>
+                <div class="offer-type-wrap">
+                    @if($prop->offer_type == 'For Sale')
+                        <span class="offer-type bg-danger">Sale</span>
+                    @elseif($prop->offer_type == 'For Rent')
+                        <span class="offer-type bg-success">Rent</span>
+                    @elseif($prop->offer_type == 'For Lease')
+                        <span class="offer-type bg-info">Lease</span>
+                    @endif
+                </div>
                 @foreach (json_decode($prop->images) as $img)
                     @if ($loop->first)
                         <img src="{{asset('images')}}/{{$img}}" alt="Image" class="img-fluid">

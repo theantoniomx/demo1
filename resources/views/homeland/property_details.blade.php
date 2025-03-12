@@ -97,7 +97,9 @@
 
                 <!-- Existing Reviews -->
                 @if ($property->reviews->isEmpty())
+                <div class="col-12">
                     <p class="text-muted">No reviews yet. Be the first to leave one!</p>
+                </div>
                 @else
                     <div class="col-12">
                         @foreach ($property->reviews as $review)
@@ -126,6 +128,20 @@
             <!-- Review Form -->
             <div class="add-review mt-4">
                 <h3 class="h5 text-black">Leave a Review</h3>
+                @if(session()->has('message'))
+                    <div class="alert alert-success">
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form action="" method="POST">
                 @csrf
                 <input type="hidden" name="review_form" value="1">
@@ -208,6 +224,7 @@
                 @endif
                 <form action="" class="form-contact-agent" method="POST">
                 @csrf
+                <input type="hidden" name="property_id" value="{{ $property->id }}">
                 <input type="hidden" name="contact_form" value="1">
                 <div class="form-group">
                     <label for="name">Name</label>
@@ -367,6 +384,55 @@
           </div>
         </div>
       </div>
+      {{-- <div class="row mb-5">
+        @foreach ($relatedProperties as $relatedProp)
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="property-entry h-100">
+                <a href="{{ route('property_details', $relatedProp->id) }}" class="property-thumbnail">
+                    <div class="offer-type-wrap">
+                        @if($relatedProp->offer_type == 'For Sale')
+                            <span class="offer-type bg-danger">Sale</span>
+                        @elseif($relatedProp->offer_type == 'For Rent')
+                            <span class="offer-type bg-success">Rent</span>
+                        @elseif($relatedProp->offer_type == 'For Lease')
+                            <span class="offer-type bg-info">Lease</span>
+                        @endif
+                    </div>
+                    @foreach (json_decode($relatedProp->images) as $img)
+                        @if ($loop->first)
+                            <img src="{{asset('images')}}/{{$img}}" alt="Image" class="img-fluid">
+                            @break
+                        @endif
+                    @endforeach
+                </a>
+                <div class="p-4 property-body">
+                    <a href="#" class="property-favorite"><span class="icon-heart-o"></span></a>
+                    <h2 class="property-title"><a href="{{ route('property_details', $relatedProp->id) }}">{{$relatedProp->address}}</a></h2>
+                    <span class="property-location d-block mb-3"><span class="property-icon icon-room"></span> {{$relatedProp->city}}, {{$relatedProp->state}}</span>
+                    <strong class="property-price text-primary mb-3 d-block text-success">{{ $relatedProp->getPriceAsCurrency() }}</strong>
+                    <ul class="property-specs-wrap mb-3 mb-lg-0">
+                        <li>
+                            <span class="property-specs">Beds</span>
+                            <span class="property-specs-number">{{$relatedProp->bedrooms}}<sup>+</sup></span>
+                        </li>
+                        <li>
+                            <span class="property-specs">Baths</span>
+                            <span class="property-specs-number">{{$relatedProp->bathrooms}}</span>
+                        </li>
+                        <li>
+                            <span class="property-specs">SQ FT</span>
+                            <span class="property-specs-number">{{$relatedProp->sq_ft}}</span>
+                        </li>
+                        <li>
+                            <span class="property-specs">Home Type</span>
+                            <span class="property-specs-number">{{$relatedProp->list_type->name}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div> --}}
     </div>
   </div>
 @endsection

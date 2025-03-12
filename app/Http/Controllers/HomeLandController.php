@@ -20,6 +20,16 @@ class HomeLandController extends Controller
         return view('homeland.index', compact('properties'));
     }
 
+    public function show($id){
+        // Obtener la propiedad actual
+        $property = Property::findOrFail($id);
+
+        // Obtener 3 propiedades aleatorias excluyendo la propiedad actual
+        $relatedProperties = Property::where('id', '!=', $id)->inRandomOrder()->take(3)->get();
+
+        return view('homeland.property_details', compact('property', 'relatedProperties'));
+    }
+
     public function property_details(Request $request, $property_id){
         // Validación y almacenamiento del formulario de contacto
         if($request->isMethod("POST") && $request->has('contact_form')){
@@ -41,6 +51,7 @@ class HomeLandController extends Controller
             $contact->email = $request->input("email");
             $contact->phone = $request->input("phone");
             $contact->message = $request->input("message");
+            $contact->property_id = $property_id; // Asignar el ID de la propiedad
             $contact->save();
 
             session()->now('message', 'Your message has been sent successfully');
@@ -107,8 +118,6 @@ class HomeLandController extends Controller
         }
         return view('homeland.contact');
     }
-
-
 
     public function about(){
         return view('homeland.about');

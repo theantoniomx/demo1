@@ -22,19 +22,19 @@
 
         <div class="col-md-12 col-lg-8 mb-5">
             @if(session()->has('message'))
-                    <div class="alert alert-success">
-                        {{ session()->get('message') }}
-                    </div>
-                @endif
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                <div class="alert alert-success">
+                    {{ session()->get('message') }}
+                </div>
+            @endif
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form action="{{ route('contact') }}" method="POST" class="p-5 bg-white border">
             @csrf
             <div class="row form-group">
@@ -68,7 +68,6 @@
                 <input type="submit" value="Send Message" class="btn btn-primary  py-2 px-4 rounded-0">
               </div>
             </div>
-
 
           </form>
         </div>

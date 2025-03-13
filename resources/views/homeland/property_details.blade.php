@@ -208,7 +208,7 @@
             <div class="bg-white widget border rounded">
 
                 <h3 class="h4 text-black widget-title mb-3">Contact Agent</h3>
-                @if(session()->has('message'))
+                {{-- @if(session()->has('message'))
                     <div class="alert alert-success">
                         {{ session()->get('message') }}
                     </div>
@@ -221,31 +221,32 @@
                             @endforeach
                         </ul>
                     </div>
-                @endif
-                <form action="" class="form-contact-agent" method="POST">
+                @endif --}}
+                <div id="successAlert" class="alert alert-success d-none">
+                    Contact message has been sent...
+                </div>
+                <form id="formContactAgent" action="" class="form-contact-agent" method="POST">
+                    <input type="hidden" name="contact_form" value="1">
+                    <input type="hidden" id="property_id" name="property_id" value="{{ $property->id }}" required>
                 @csrf
-                <input type="hidden" name="property_id" value="{{ $property->id }}">
-                <input type="hidden" name="contact_form" value="1">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" id="name" name="name" class="form-control" value="{{old('name')}}">
+                    <input type="text" id="nameContact" name="name" class="form-control" value="{{old('name')}}">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" class="form-control" value="{{old('email')}}">
+                    <input type="email" id="emailContact" name="email" class="form-control" value="{{old('email')}}">
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone</label>
-                    <input type="text" id="phone" name="phone" class="form-control" value="{{old('phone')}}">
+                    <input type="text" id="phoneContact" name="phone" class="form-control" value="{{old('phone')}}">
                 </div>
                 <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea id="message" name="message" class="form-control" rows="5">
-                        {{old('message')}}
-                    </textarea>
+                    <textarea id="messageContact" name="message" class="form-control">{{ old('message') }}</textarea>
                 </div>
                 <div class="form-group">
-                    <input type="submit" id="phone" class="btn btn-primary" value="Send Message">
+                    <input type="submit" id="btnSendContactAgentMessage" class="btn btn-primary" value="Send Message">
                 </div>
                 </form>
             </div>

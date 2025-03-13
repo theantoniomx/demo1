@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('email', 50);
             $table->string('phone', 12);
             $table->text("message");
+            $table->foreignId('property_id')->constrained('properties')->onDelete('cascade');
             $table->timestamps();
         });
     }

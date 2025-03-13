@@ -10,6 +10,7 @@ use App\Models\Property;
 use App\Models\PropertyListingType;
 use App\Models\Review;
 use Carbon\Carbon;
+use Illuminate\Container\Attributes\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -31,6 +32,7 @@ class HomeLandController extends Controller
     }
 
     public function property_details(Request $request, $property_id){
+
         // Validación y almacenamiento del formulario de contacto
         if($request->isMethod("POST") && $request->has('contact_form')){
             $request->validate([
@@ -38,24 +40,27 @@ class HomeLandController extends Controller
                 'email' => 'required|email|max:50',
                 'phone' => 'required|max:20|regex:/^[0-9+\-() ]+$/',
                 'message' => 'required|string|max:1000',
+                'property_id' => 'required|integer|exists:properties,id'
             ],[
                 'name.required' => 'The name field is required.',
                 'email.required' => 'The email field is required.',
                 'email.email' => 'The email must be a valid email address.',
                 'phone.regex' => 'The phone number format is invalid.',
                 'message.required' => 'The message field is required.',
+                'property_id.required' => 'The property ID is required.'
             ]);
-
+            //dd($request->all());
             $contact = new ContactAgent();
             $contact->name = $request->input("name");
             $contact->email = $request->input("email");
             $contact->phone = $request->input("phone");
             $contact->message = $request->input("message");
-            $contact->property_id = $property_id; // Asignar el ID de la propiedad
+            $contact->property_id = $request['property_id']; // Asignar el ID de la propiedad
             $contact->save();
 
             session()->now('message', 'Your message has been sent successfully');
         }
+        //dd($request->all());
 
         // Validación y almacenamiento del formulario de reseñas
         if($request->isMethod("POST") && $request->has('review_form')){

@@ -24,6 +24,8 @@
 
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
 
+    <link rel="stylesheet" href="//cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
+
   </head>
   <body>
 
@@ -224,6 +226,7 @@
   <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
   <script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script>
   <script src="{{asset('js/aos.js')}}"></script>
+  <script src="//cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
 
   <script src="{{asset('js/main.js')}}"></script>
   <script src="{{asset('js/homeland.js')}}"></script>

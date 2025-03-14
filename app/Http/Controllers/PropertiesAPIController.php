@@ -18,6 +18,12 @@ class PropertiesAPIController extends Controller
         return response()->json($properties);
     }
 
+    public function properties_datatables()
+    {
+        $properties = Property::with('city')->with('list_type')->get();
+        return response()->json(["data"=> $properties]);
+    }
+
     public function saveContactAgent(Request $request){
 
         $validator = Validator::make($request->all(), [

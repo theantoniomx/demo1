@@ -34,4 +34,17 @@ $(document).ready(function() {
             }
         });
     });
+
+    let table = new DataTable('#tblProperties1');
+
+    new DataTable('#tblProperties2', {
+        ajax: '/api/properties/datatables',
+        columns: [
+            { data: 'address' },
+            { data: 'price' },
+            { data: 'list_type.name' },
+            { data: 'offer_type' },
+            { data: 'city.name' }
+        ]
+    });
 });

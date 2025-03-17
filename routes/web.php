@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminPropertiesController;
+use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\HomeLandController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SiteController;
@@ -38,3 +39,4 @@ Route::get('/login', [HomeLandController::class, 'login'])->name('login');
 Route::get('/register', [HomeLandController::class, 'register'])->name('register');
 
 Route::get('/admin/properties', [AdminPropertiesController::class, 'index'])->name('admin.properties.index');
+Route::get('/admin/employees', [EmployeesController::class, 'index'])->name('admin.employees.index');

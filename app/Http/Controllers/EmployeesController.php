@@ -13,4 +13,11 @@ class EmployeesController extends Controller
         return view('homeland.admin.employees.index', compact('employees'));
         //dd($response->object());
     }
+
+    public function employees_fetch()
+    {
+        $response = Http::get('http://localhost:3000/api/v1/employees');
+        $employees = $response->object();
+        return view('homeland.admin.employees.employees_fetch');
+    }
 }

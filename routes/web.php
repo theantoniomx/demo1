@@ -40,3 +40,5 @@ Route::get('/register', [HomeLandController::class, 'register'])->name('register
 
 Route::get('/admin/properties', [AdminPropertiesController::class, 'index'])->name('admin.properties.index');
 Route::get('/admin/employees', [EmployeesController::class, 'index'])->name('admin.employees.index');
+
+Route::get('/admin/employees_fetch', [EmployeesController::class, 'employees_fetch'])->name('admin.employees.employees_fetch');

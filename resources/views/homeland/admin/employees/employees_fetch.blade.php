@@ -19,29 +19,24 @@
 <div class="site-section">
 <div class="container">
     <div class="row mb-5 justify-content-center" data-aos="fade-up">
-        <div class="col-md-9">
+        <div class="col-md-10">
             <div class="site-section-title text-left">
-                <h2>Properties</h2>
-                <table id="tblProperties1">
+                <h2>Employees</h2>
+                <button id="btnGetEmployeesUsingFetch">GET EMPLOYEES</button>
+                <table id="tblEmployees1">
                     <thead>
                         <tr>
-                            <th>NAME</th>
+                            <th>EMPLOYEE NO.</th>
+                            <th>FIRST NAME</th>
                             <th>LAST NAME</th>
                             <th>EMAIL</th>
+                            <th>GENDER</th>
                             <th>SALARY</th>
                             <th>DEPARTMENT</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($employees as $employee)
-                        <tr>
-                            <td>{{ $employee->first_name??'Undefined' }}</td>
-                            <td>{{ $employee->last_name??'Undefined' }}</td>
-                            <td>{{ $employee->email??'Undefined' }}</td>
-                            <td>{{ $employee->salary??'Undefined' }}</td>
-                            <td>{{ $employee->department??'Undefined' }}</td>
-                        </tr>
-                        @endforeach
+
                     </tbody>
                 </table>
             </div>

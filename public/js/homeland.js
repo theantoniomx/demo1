@@ -47,4 +47,24 @@ $(document).ready(function() {
             { data: 'city.name' }
         ]
     });
+
+    $("#btnGetEmployeesUsingFetch").click((event) => {
+        /* fetch("http://localhost:3000/api/v1/employees")
+        .then(response => response.json())
+        .then(results => {
+            console.table(results)
+        }).catch(error => console.error(error)); */
+        new DataTable('#tblEmployees1', {
+            ajax: 'http://localhost:3000/api/v1/employees',
+            columns: [
+                { data: 'emp_number' },
+                { data: 'first_name' },
+                { data: 'last_name' },
+                { data: 'email' },
+                { data: 'gender' },
+                { data: 'salary' },
+                { data: 'department' }
+            ]
+        });
+    });
 });
